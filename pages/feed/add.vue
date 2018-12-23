@@ -47,10 +47,15 @@ export default {
       const storedFeeds = await db.getAll()
       const storedFeedIds = storedFeeds.map((feed) => feed.id)
 
+      // feedlyAPIのリクエストURLを生成
       const searchQuery = encodeURIComponent(this.searchQuery)
       const feedlyUrl = `https://cloud.feedly.com/v3/search/feeds/?query=${searchQuery}`
+
+      // YQLのリクエストURLを生成
       const yqlQuery = encodeURIComponent(`select * from json where url="${feedlyUrl}"`)
       const yqlUrl = `https://query.yahooapis.com/v1/public/yql?q=${yqlQuery}&format=json`
+
+      // JSONPでYQL経由でフィードを検索
       jsonp(yqlUrl, null, (err, data) => {
         if(data.query.results === null) {
           this.feeds = []
@@ -63,6 +68,7 @@ export default {
           feeds = [feeds]
         }
 
+        // フィードの一覧を更新して検索結果を表示
         this.feeds = feeds.filter((feed) => feed.visualUrl)
           .map((feed) => {
             const feedUrl = feed.feedId.replace('feed/', '')

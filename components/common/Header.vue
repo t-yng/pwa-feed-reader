@@ -28,7 +28,7 @@ export default {
   border-bottom: 1px solid #D1D0D0;
   display: grid;
   grid-template-rows: 100%;
-  grid-template-columns: 10% 1fr 10%;
+  grid-template-columns: 15% 1fr 15%;
   height: 40px;
   position: fixed;
   top: 0;
@@ -47,7 +47,7 @@ export default {
 .header-start {
   grid-row: 1 / 2;
   grid-column: 1 / 2;
-  padding-left: 15px;
+  padding-left: 5%;
 }
 
 .icon-back {

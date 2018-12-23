@@ -1,3 +1,12 @@
+/**
+ * フィード情報を管理するデータベースクラス
+ *
+ * 使い方:
+ * import feedDb from 'feed-db'
+ *
+ * const db = await feedDb.connect()
+ * db.add(feed)
+ */
 class FeedDB {
   static get DB_NAME() {
     return 'feed-db'
@@ -7,6 +16,10 @@ class FeedDB {
     return 'feeds'
   }
 
+  /**
+   * データベースへ接続する
+   * 非同期で接続インスタンスが取得されるのでPromiseで対応している
+   */
   async connect() {
     return new Promise((resolve, reject) => {
       if(this.db) {
@@ -44,6 +57,9 @@ class FeedDB {
     this.getFeedsStore().delete(feedId)
   }
 
+  /**
+   * DB内の全てのフィード情報を取得する
+   */
   async getAll() {
     return new Promise((resolve, reject) => {
       let feeds = [];
