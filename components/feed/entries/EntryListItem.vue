@@ -3,7 +3,7 @@
     <div class="entry-meta">
       <div class="entry-title">{{ entry.title }}</div>
       <div v-if="entry.description" class="entry-description">{{ entry.description }}</div>
-      <div class="entry-updated">{{ formatDate(new Date(entry.updated)) }}</div>
+      <div v-if="entry.updated" class="entry-updated">{{ formatDate(new Date(entry.updated)) }}</div>
     </div>
   </div>
 </template>
