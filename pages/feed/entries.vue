@@ -34,13 +34,17 @@ export default {
         entries = (results.item) ? results.item : entries
 
         this.entries = entries.map((entry) => {
-            let pubDate = (entry.pubDate) ? entry.pubDate : ''
-            pubDate = (entry.updated) ? entry.updated : pubDate
-            return {
-                title: entry.title,
-                description: (entry.description) ? entry.description : '',
-                updated: pubDate
-            }
+          let pubDate = (entry.pubDate) ? entry.pubDate : ''
+          pubDate = (entry.updated) ? entry.updated : pubDate
+
+          const link = (entry.link.href) ? entry.link.href : entry.link
+
+          return {
+              title: entry.title,
+              description: (entry.description) ? entry.description : '',
+              updated: pubDate,
+              link: link
+          }
         })
       })
     }

@@ -6,7 +6,9 @@
       </div>
     </div>
     <div class="header-center">
-      <div class="page-title">{{ title }}</div>
+      <div class="page-title-block">
+        <div class="page-title">{{ title }}</div>
+      </div>
     </div>
     <div class="header-end">
       <slot name="header-end"></slot>
@@ -60,14 +62,21 @@ export default {
 .header-center {
   grid-row: 1 / 2;
   grid-column: 2 / 3;
+  overflow: hidden;
 }
 
-.page-title {
+.page-title-block {
   align-items: center;
   display: flex;
   font-weight: bold;
   height: 100%;
   justify-content: center;
+}
+
+.page-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .header-end {
