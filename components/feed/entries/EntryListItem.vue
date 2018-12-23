@@ -40,8 +40,16 @@ export default {
   padding: 10px 20px;
 }
 
+.entry-meta {
+  overflow: hidden;
+}
+
 .entry-title {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+.entry-description {
+  color: #2d2d2d;
 }
 
 .entry-updated {
