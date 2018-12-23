@@ -1,0 +1,18 @@
+<template>
+  <div class="check-icon"></div>
+</template>
+
+
+<style>
+.check-icon {
+  color: #000;
+  position: absolute;
+  margin-left: 3px;
+  margin-top: 4px;
+  width: 14px;
+  height: 8px;
+  border-bottom: solid 1px currentColor;
+  border-left: solid 1px currentColor;
+  transform: rotate(-45deg);
+}
+</style>

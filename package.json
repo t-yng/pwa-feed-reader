@@ -1,0 +1,28 @@
+{
+  "name": "feed-reader",
+  "version": "1.0.0",
+  "description": "My glorious Nuxt.js project",
+  "author": "t-yng",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "devHttps": "node server/index.js",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "up": "npm run build && npm run start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^2.6.0",
+    "axios": "^0.18.0",
+    "cross-env": "^5.2.0",
+    "jsonp": "^0.2.1",
+    "lodash": "^4.17.11",
+    "nuxt": "^2.0.0",
+    "yql": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
