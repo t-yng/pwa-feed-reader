@@ -43,11 +43,10 @@ export default {
   width: 35px;
 }
 
-
 .header-start {
   grid-row: 1 / 2;
   grid-column: 1 / 2;
-  padding-left: 5%;
+  padding-left: 20%;
 }
 
 .icon-back {
