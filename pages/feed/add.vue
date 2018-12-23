@@ -16,7 +16,7 @@
 
 <script>
 import _ from 'lodash'
-import axios from 'axios'
+import jsonp from 'jsonp'
 import Header from '~/components/feed/add/Header.vue'
 import Content from '~/components/common/Content.vue'
 import FeedListItem from '~/components/feed/add/FeedListItem.vue'
@@ -47,22 +47,35 @@ export default {
       const storedFeeds = await db.getAll()
       const storedFeedIds = storedFeeds.map((feed) => feed.id)
 
-      const url = `https://cloud.feedly.com/v3/search/feeds/?query=${this.searchQuery}`
-      const result = await axios.get(url)
-      this.feeds = result.data.results
-        .filter((feed) => feed.visualUrl)
-        .map((feed) => {
-          const feedUrl = feed.feedId.replace('feed/', '')
-          return {
-            id: feed.feedId,
-            added: storedFeedIds.includes(feed.feedId),
-            title: feed.title,
-            website: feed.website,
-            url: feedUrl,
-            iconUrl: feed.visualUrl,
-          }
+      const feedlyUrl = `https://cloud.feedly.com/v3/search/feeds/?query=${this.searchQuery}`
+      const yqlQuery = `select * from json where url='${feedlyUrl}'`
+      const yqlUrl = `https://query.yahooapis.com/v1/public/yql?q=${yqlQuery}&format=json`
+      jsonp(yqlUrl, null, (err, data) => {
+        if(data.query.results === null) {
+          this.feeds = []
+          return
+        }
+
+        let feeds = data.query.results.json.results
+        // フィードが1件の時にYQLが配列からオブジェクトにキャストするため配列に戻す
+        if(!Array.isArray(feeds)) {
+          feeds = [feeds]
+        }
+
+        this.feeds = feeds.filter((feed) => feed.visualUrl)
+          .map((feed) => {
+            const feedUrl = feed.feedId.replace('feed/', '')
+            return {
+              id: feed.feedId,
+              added: storedFeedIds.includes(feed.feedId),
+              title: feed.title,
+              website: feed.website,
+              url: feedUrl,
+              iconUrl: feed.visualUrl,
+            }
+          })
         })
-    }
+      }
   },
   data: function() {
     return {
