@@ -47,8 +47,9 @@ export default {
       const storedFeeds = await db.getAll()
       const storedFeedIds = storedFeeds.map((feed) => feed.id)
 
-      const feedlyUrl = `https://cloud.feedly.com/v3/search/feeds/?query=${this.searchQuery}`
-      const yqlQuery = `select * from json where url='${feedlyUrl}'`
+      const searchQuery = encodeURIComponent(this.searchQuery)
+      const feedlyUrl = `https://cloud.feedly.com/v3/search/feeds/?query=${searchQuery}`
+      const yqlQuery = encodeURIComponent(`select * from json where url="${feedlyUrl}"`)
       const yqlUrl = `https://query.yahooapis.com/v1/public/yql?q=${yqlQuery}&format=json`
       jsonp(yqlUrl, null, (err, data) => {
         if(data.query.results === null) {
